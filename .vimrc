@@ -53,6 +53,17 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 set nowrap
 set number
 
+" copy the indentation from the previous line, when starting a new line
+set autoindent
+
+" automatically inserts one extra level of indentation in some cases for C-like files
+set cindent
+
+" codeStyle
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
 " silent vim - disable beeping
 set vb t_vb=
 
