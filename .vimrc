@@ -8,7 +8,7 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
+" let Vundle manage Vundle, REQUIRED
 Plugin 'VundleVim/Vundle.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Bundle 'nanotech/jellybeans.vim'
@@ -26,21 +27,11 @@ Bundle 'nanotech/jellybeans.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
 color jellybeans
 
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
 
 " enable airline's smart tabline
 let g:airline#extensions#tabline#enabled = 1
@@ -50,8 +41,17 @@ let g:airline_theme='bubblegum'
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 
+
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"open a NERDTree automatically when vim starts up
+autocmd vimenter * NERDTree
+
+
 set nowrap
 set number
+set noswapfile
+set cursorline
 
 " copy the indentation from the previous line, when starting a new line
 set autoindent
@@ -67,13 +67,21 @@ set expandtab
 " silent vim - disable beeping
 set vb t_vb=
 
+" Quick Esc
+imap jj <ESC>
+
+nmap <F2> :NERDTreeToggle<CR>
+
+" switching buffers
+nmap <F3> :bprevious<cr>
+nmap <F4> :bnext<cr>
+
+" close buffer without closing the window
+:command! BW :bn|:bd#
+
 " this allows buffers to be hidden if you've modified a buffer.
 set hidden
 
-
-nmap <F2> :NERDTreeToggle<CR>
-nmap <F3> :bnext<cr>
-nmap <F4> :bprevious<cr>
 
 nmap <F8> :TagbarToggle<CR>
 
