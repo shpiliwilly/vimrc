@@ -8,18 +8,19 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, REQUIRED
+" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugins go here
 
-Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Bundle 'nanotech/jellybeans.vim'
+Plugin 'mileszs/ack.vim'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -27,8 +28,11 @@ Bundle 'nanotech/jellybeans.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Put your non-Plugin stuff after this line
+
 
 color jellybeans
+
 
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
@@ -44,14 +48,31 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"open a NERDTree automatically when vim starts up
-autocmd vimenter * NERDTree
+"open a NERDTree automatcally when vim starts up
+"autocmd vimenter * NERDTree
 
+
+" case insensitive search
+set ignorecase
+" use case if any caps used
+set smartcase 
+" show match as search proceeds
+set incsearch
+" search highlighting
+set hlsearch 
+
+" keeps the current visual block selection active after changing indent with '<' or '>'
+vnoremap > >gv
+vnoremap < <gv
 
 set nowrap
 set number
 set noswapfile
 set cursorline
+" codeStyle
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " copy the indentation from the previous line, when starting a new line
 set autoindent
@@ -59,12 +80,7 @@ set autoindent
 " automatically inserts one extra level of indentation in some cases for C-like files
 set cindent
 
-" codeStyle
-set tabstop=4
-set shiftwidth=4
-set expandtab
-
-" silent vim - disable beeping
+"silent vim - disable beeping
 set vb t_vb=
 
 " Quick Esc
@@ -82,6 +98,4 @@ nmap <F4> :bnext<cr>
 " this allows buffers to be hidden if you've modified a buffer.
 set hidden
 
-
-nmap <F8> :TagbarToggle<CR>
 
