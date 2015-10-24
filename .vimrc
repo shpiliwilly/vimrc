@@ -16,11 +16,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
-Bundle 'Valloric/YouCompleteMe'
 Plugin 'bling/vim-airline'
 Bundle 'nanotech/jellybeans.vim'
 Plugin 'mileszs/ack.vim'
-
+Plugin 'Rip-Rip/clang_complete'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -32,9 +31,6 @@ filetype plugin indent on    " required
 
 
 color jellybeans
-
-
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 
 " enable airline's smart tabline
@@ -50,6 +46,29 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "open a NERDTree automatcally when vim starts up
 "autocmd vimenter * NERDTree
+
+
+
+" complete options (disable preview scratch window)
+set completeopt=menu,menuone,longest
+" Limit popup menu height
+set pumheight=15
+" Clang Complete Settings
+let g:clang_use_library=1
+
+
+
+" If equal to 1, open quickfix window on error.
+let g:clang_complete_copen=1
+" If clang should complete preprocessor macros and constants.
+let g:clang_complete_macros=1
+" Additionnal compilation argument passed to libclang.
+"let g:clang_user_options=' -std=c++11 || exit 0'
+
+" 0 will make you arrow down to select the first option, 
+" 1 will select the first option for you, but won't insert it unless you press enter. 
+" 2 will automatically insert what it thinks is right. 
+let g:clang_auto_select=1
 
 
 " case insensitive search
@@ -84,7 +103,7 @@ set cindent
 set vb t_vb=
 
 " Quick Esc
-imap jj <ESC>
+imap kj <ESC>
 
 nmap <F2> :NERDTreeToggle<CR>
 
