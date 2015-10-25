@@ -20,6 +20,7 @@ Plugin 'bling/vim-airline'
 Bundle 'nanotech/jellybeans.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'Rip-Rip/clang_complete'
+Plugin 'ervandew/supertab'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
