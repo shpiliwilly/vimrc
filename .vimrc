@@ -21,6 +21,8 @@ Bundle 'nanotech/jellybeans.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'Rip-Rip/clang_complete'
 Plugin 'ervandew/supertab'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
