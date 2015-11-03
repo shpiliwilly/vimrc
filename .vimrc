@@ -23,6 +23,7 @@ Plugin 'Rip-Rip/clang_complete'
 Plugin 'ervandew/supertab'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
