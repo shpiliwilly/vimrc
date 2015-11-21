@@ -18,6 +18,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'vim-scripts/darkburn'
 Plugin 'mileszs/ack.vim'
 Plugin 'Rip-Rip/clang_complete'
 Plugin 'ervandew/supertab'
@@ -33,8 +34,26 @@ filetype plugin indent on    " required
 
 " Put your non-Plugin stuff after this line
 
+"color jellybeans
+color darkburn
 
-color jellybeans
+
+let mapleader=" "
+
+" open new file
+nnoremap <Leader>o :CtrlP<CR>
+
+" save current buffer
+nnoremap <Leader>w :w<CR>
+
+" save all open buffers
+nnoremap <Leader>W :wa<CR>
+
+" close buffer without closing the window
+:command! BW :bn|:bd#
+nnoremap <Leader>q :BW<CR>
+
+
 
 
 " enable airline's smart tabline
@@ -75,6 +94,11 @@ let g:clang_complete_macros=1
 let g:clang_auto_select=1
 
 
+let g:syntastic_always_populate_loc_list=0
+let g:syntastic_cpp_compiler="gcc"
+let g:syntastic_cpp_compiler_options="-std=c++11 -stdlib=libc++"
+
+
 " case insensitive search
 set ignorecase
 " use case if any caps used
@@ -108,6 +132,7 @@ set vb t_vb=
 
 " Quick Esc
 imap kj <ESC>
+nnoremap ; :
 
 nmap <F2> :NERDTreeToggle<CR>
 
