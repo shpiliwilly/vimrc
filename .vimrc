@@ -4,13 +4,12 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugins go here
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ervandew/supertab'
@@ -28,9 +27,10 @@ Plugin 'tomasr/molokai'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'vim-scripts/darkburn'
 
+" TODO. explore hose plugins
+"Plugin 'Rip-Rip/clang_complete'             " code completion
+"Plugin 'scrooloose/syntastic'
 "Plugin 'mileszs/ack.vim'
-"Plugin 'Rip-Rip/clang_complete'
-"Plugin 'Valloric/YouCompleteMe'  
 "Plugin 'vim-scripts/DfrankUtil'
 "Plugin 'vim-scripts/Vimprj'
 "Plugin 'vim-scripts/indexer.tar.gz'
@@ -47,7 +47,6 @@ Bundle 'vim-scripts/darkburn'
 "Plugin 'tomtom/tlib_vim'
 "Plugin 'garbas/vim-snipmate'
 "Plugin 'honza/vim-snippets'
-"Plugin 'Xuyuanp/nerdtree-git-plugin'        " Marks git changed files
 "Plugin 'sjl/splice.vim'                     " Git mergetool
 "Plugin 'vim-scripts/taglist.vim'            " Tag list
 "Plugin 'Valloric/ListToggle'                " Toggles location list and quickfix
@@ -71,11 +70,6 @@ color jellybeans
 nnoremap <leader>b <C-o>
 
 
-" color for current line
-hi CursorLine   cterm=NONE ctermbg=DarkBlue ctermfg=white guibg=darkred guifg=white
-hi CursorColumn cterm=NONE ctermbg=DarkBlue ctermfg=white guibg=darkred guifg=white
-"darkred
-
 " highlight current line only in current window
 augroup CursorLine
     au!
@@ -83,38 +77,41 @@ augroup CursorLine
     au WinLeave * setlocal nocursorline
 augroup END
 
-
+" color for cursor and current line
+function s:SetCursorLine()
+    set cursorline
+    hi cursorline cterm=none ctermbg=darkblue ctermfg=white guibg=darkred guifg=white
+endfunction
+autocmd VimEnter * call s:SetCursorLine()
 
 let mapleader=" "
-
 " manage buffers/files
-nnoremap <Leader>o :CtrlPBuffer<CR>
-nnoremap <Leader>i :CtrlPMRU<CR>
+"nnoremap <Leader>u :CtrlP<CR>
+nmap <Leader>i :CtrlPMRU<CR>
+nmap <Leader>o :CtrlPBuffer<CR>
 
 " save current buffer
-nnoremap <Leader>w :w<CR>
-
+nmap <Leader>w :w<CR>
 " save all open buffers
-nnoremap <Leader>W :wa<CR>
+nmap <Leader>W :wa<CR>
 
 " close buffer without closing the window
 :command! BW :bn|:bd#
-nnoremap <Leader>q :BW<CR>
+nmap <Leader>q :BW<CR>
 
-" enable airline's smart tabline
-"let g:airline#extensions#tabline#enabled = 1
+
 " Show just the filename
 "let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme='bubblegum'
+let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#whitespace#checks = [ 'indent', 'mixed-indent-file' ]
+let g:airline_section_y = ''
+let g:airline_section_x = ''
 "let g:airline_theme='solarized dark'
+
 set laststatus=2
 set ttimeoutlen=50
 
-
-" close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"open a NERDTree automatcally when vim starts up
-"autocmd vimenter * NERDTree
 
 let g:syntastic_always_populate_loc_list=0
 let g:syntastic_cpp_compiler="gcc"
@@ -124,18 +121,19 @@ let g:syntastic_cpp_compiler_options="-std=c++11 -stdlib=libc++"
 " case insensitive search
 set ignorecase
 " use case if any caps used
-set smartcase 
+set smartcase
 " show match as search proceeds
 set incsearch
 " search highlighting
-set hlsearch 
+set hlsearch
+
+highlight Search ctermfg=black cterm=none guibg=LightYellow ctermbg=LightYellow
 " keeps the current visual block selection active after changing indent with '<' or '>'
 vnoremap > >gv
 vnoremap < <gv
 set nowrap
 set number
 set noswapfile
-set cursorline
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -151,6 +149,7 @@ set hidden
 set textwidth=0
 "set colorcolumn=80
 "hi ColorColumn ctermbg=darkgrey guibg=darkgrey
+
 
 " Quick Esc
 imap kj <ESC>
@@ -203,17 +202,25 @@ set completeopt=menu,menuone
 " opens search results in a window w/ links and highlight the matches
 command! -nargs=+ Grp execute 'silent grep! -I -r -n --include=*.h --include=*.hpp --include=*.inl --include=*.cpp --include=*.c . -e <args>' | copen | execute 'silent /<args>'
 :nmap <leader>f :Grp  <c-r>=expand("<cword>")<cr><cr>
-map <leader>n :cn<CR>
-map <leader>p :cp<CR>
+nmap <leader>n :cn<CR>
+nmap <leader>p :cp<CR>
 
-map <leader>m :A<CR>
+nmap <leader>m :A<CR>
 
-" set pastetoggle=<leader>v
+" switch to previous file. Fast way to toggle between two files
+nmap <leader>z <C-^>
+
+"set pastetoggle=<leader>v
 
 " save and load sessions.
-map <leader>S :mksession! ~/.vim_session <cr>
-map <leader>L :source ~/.vim_session <cr>
+nmap <leader>S :mksession! ~/.vim_session <cr>
+nmap <leader>L :source ~/.vim_session <cr>
 
 
-set makeprg=tbmake\ -s\ RECURSIVE=NO\ -j\ 16
+" complete options (disable preview scratch window)
+set completeopt=menu,menuone,longest
+" Limit popup menu height
+set pumheight=15
 
+highlight entryDateTime ctermfg=red guifg=#ff0000
+syntax on
