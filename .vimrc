@@ -4,7 +4,6 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -35,7 +34,6 @@ Bundle 'vim-scripts/darkburn'
 "Plugin 'vim-scripts/Vimprj'
 "Plugin 'vim-scripts/indexer.tar.gz'
 "Plugin 'vim-scripts/OmniCppComplete'        " cpp completer based on tags
-"Plugin 'jistr/vim-nerdtree-tabs'            " Same file list on each tab
 "Plugin 'vim-scripts/vim-l9'
 "Plugin 'vim-scripts/ShowMarks'
 "Plugin 'vim-scripts/cscope.vim'
@@ -59,8 +57,8 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
-"color darkburn
 "color molokai
+"color darkburn
 color jellybeans
 
 
@@ -84,15 +82,15 @@ function s:SetCursorLine()
 endfunction
 autocmd VimEnter * call s:SetCursorLine()
 
+
 let mapleader=" "
 
-" manage buffers
+" manage buffers/files
 nmap <Leader>i :CtrlPMRU<CR>
 nmap <Leader>o :CtrlPBuffer<CR>
 
 " save current buffer
 nmap <Leader>w :w<CR>
-
 " save all open buffers
 nmap <Leader>W :wa<CR>
 
@@ -100,20 +98,20 @@ nmap <Leader>W :wa<CR>
 :command! BW :bn|:bd#
 nmap <Leader>q :BW<CR>
 
-" airline plugin's settings
+
 let g:airline_theme='bubblegum'
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#whitespace#checks = [ 'indent', 'mixed-indent-file' ]
 let g:airline_section_y = ''
 let g:airline_section_x = ''
 
-set laststatus=2
-set ttimeoutlen=50
-
-" ??
 let g:syntastic_always_populate_loc_list=0
 let g:syntastic_cpp_compiler="gcc"
 let g:syntastic_cpp_compiler_options="-std=c++11 -stdlib=libc++"
+
+
+set laststatus=2
+set ttimeoutlen=50
 
 " case insensitive search
 set ignorecase
@@ -124,19 +122,18 @@ set incsearch
 " search highlighting
 set hlsearch
 
-highlight Search ctermfg=black cterm=none guibg=LightYellow ctermbg=LightYellow
+highlight Search ctermfg=black cterm=none guibg=lightyellow ctermbg=yellow
 
-vnoremap > >gv
+
 " keeps the current visual block selection active after changing indent with '<' or '>'
+vnoremap > >gv
 vnoremap < <gv
-
 set nowrap
 set number
 set noswapfile
 set tabstop=4
 set shiftwidth=4
 set expandtab
-
 " copy the indentation from the previous line, when starting a new line
 set autoindent
 " automatically inserts one extra level of indentation in some cases for C-like files
@@ -146,21 +143,29 @@ set vb t_vb=
 " this allows buffers to be hidden if you've modified a buffer.
 set hidden
 
-" ??
 set textwidth=0
+"set colorcolumn=80
+"hi ColorColumn ctermbg=darkgrey guibg=darkgrey
+
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
+" complete options (disable preview scratch window)
+set completeopt=menu,menuone,longest
+" Limit popup menu height
+set pumheight=15
+
 
 " Quick Esc
 imap kj <ESC>
+" nnoremap ; :
 
 " Easy window navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-" Open new split panes to right and bottom
-set splitbelow
-set splitright
 
 " ShowMarks
 "let g:showmarks_textlower="\t>"
@@ -188,16 +193,6 @@ nmap <leader>m :A<CR>
 " switch to previous file. Fast way to toggle between two files
 nmap <leader>z <C-^>
 
-"set pastetoggle=<leader>v
-
 " save and load sessions.
 nmap <leader>S :mksession! ~/.vim_session <cr>
 nmap <leader>L :source ~/.vim_session <cr>
-
-" complete options (disable preview scratch window)
-set completeopt=menu,menuone,longest
-" Limit popup menu height
-set pumheight=15
-
-highlight entryDateTime ctermfg=red guifg=#ff0000
-syntax on
