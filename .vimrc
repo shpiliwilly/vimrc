@@ -22,7 +22,6 @@ Plugin 'lyuts/vim-rtags'
 
 " Color schemes
 Plugin 'flazz/vim-colorschemes'
-Plugin 'tomasr/molokai'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'vim-scripts/darkburn'
 
@@ -50,6 +49,7 @@ Bundle 'vim-scripts/darkburn'
 "Plugin 'Valloric/ListToggle'                " Toggles location list and quickfix
 "Plugin 'chrisbra/Recover.vim'               " diff the diferences when recovering
 "Plugin 'git@bitbucket.org:a_romanov/vim-tb.git'
+"Plugin 'tomasr/molokai'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " All of your Plugins must be added before the following line
